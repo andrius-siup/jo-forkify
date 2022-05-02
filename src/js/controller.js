@@ -1,6 +1,8 @@
 // import icons from '../img/icons.svg'; // Parcel v1
 import icons from 'url:../img/icons.svg'; // Parcel v2
-console.log(icons);
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 const recipeContainer = document.querySelector('.recipe');
 
 const timeout = function (s) {
