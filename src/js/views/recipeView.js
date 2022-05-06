@@ -2,18 +2,15 @@ import View from './View.js';
 
 // import icons from '../img/icons.svg'; // Parcel v1
 import icons from 'url:../../img/icons.svg'; // Parcel v2
-import {Fraction} from 'fractional';
+import { Fraction } from 'fractional';
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _errorMessage = 'We could not find recipe for your query. Please try again!';
   _message = '';
- 
 
   addHandlerRender(handler) {
-    ['hashchange', 'load'].forEach(ev =>
-      window.addEventListener(ev, handler)
-    );
+    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
   _generateMarkup() {
@@ -61,11 +58,6 @@ class RecipeView extends View {
         </div>
       </div>
 
-      <div class="recipe__user-generated">
-        <svg>
-          <use href="${icons}#icon-user"></use>
-        </svg>
-      </div>
       <button class="btn--round">
         <svg class="">
           <use href="${icons}#icon-bookmark-fill"></use>
@@ -76,9 +68,7 @@ class RecipeView extends View {
     <div class="recipe__ingredients">
       <h2 class="heading--2">Recipe ingredients</h2>
       <ul class="recipe__ingredient-list">
-        ${this._data.ingredients
-          .map(this._generateMarkupIngredient)
-          .join('')}
+        ${this._data.ingredients.map(this._generateMarkupIngredient).join('')}
 
       </ul>
     </div>
@@ -112,7 +102,9 @@ class RecipeView extends View {
       <svg class="recipe__icon">
         <use href="${icons}#icon-check"></use>
       </svg>
-      <div class="recipe__quantity">${ing.quantity ? new Fraction(ing.quantity).toString() : ''}</div>
+      <div class="recipe__quantity">${
+        ing.quantity ? new Fraction(ing.quantity).toString() : ''
+      }</div>
       <div class="recipe__description">
         <span class="recipe__unit">${ing.unit}</span>
         ${ing.description}
