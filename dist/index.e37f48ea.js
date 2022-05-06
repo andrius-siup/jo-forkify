@@ -552,7 +552,6 @@ const controlRecipes = async function() {
 const controlSearchResults = async function() {
     try {
         _resultsViewJsDefault.default.renderSpinner();
-        console.log(_resultsViewJsDefault.default);
         // 1) Get search query
         const query = _searchViewJsDefault.default.getQuery();
         if (!query) return;
@@ -560,6 +559,7 @@ const controlSearchResults = async function() {
         await _modelJs.loadSearchResults(query);
         // 3) Render results
         console.log(_modelJs.state.search.results);
+        _resultsViewJsDefault.default.render(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
     }
@@ -2815,6 +2815,30 @@ var _viewJs = require("./View.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class ResultsView extends _viewJsDefault.default {
     _parentElement = document.querySelector('.results');
+    _generateMarkup() {
+        console.log(this._data);
+        return this._data.map(this._generateMarkupPreview).join('');
+    }
+    _generateMarkupPreview() {
+        return `
+      <li class="preview">
+        <a class="preview__link preview__link--active" href="#23456">
+          <figure class="preview__fig">
+            <img src="src/img/test-1.jpg" alt="Test" />
+          </figure>
+          <div class="preview__data">
+            <h4 class="preview__title">Pasta with Tomato Cream ...</h4>
+            <p class="preview__publisher">The Pioneer Woman</p>
+            <div class="preview__user-generated">
+              <svg>
+                <use href="src/img/icons.svg#icon-user"></use>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </li>
+    `;
+    }
 }
 exports.default = new ResultsView();
 
